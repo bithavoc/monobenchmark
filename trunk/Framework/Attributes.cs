@@ -1,7 +1,7 @@
 
 using System;
 
-namespace Framework
+namespace  MonoBenchmark.Framework
 {
 	[AttributeUsage(AttributeTargets.Class)]
 	public class TimeFixtureAttribute : Attribute
