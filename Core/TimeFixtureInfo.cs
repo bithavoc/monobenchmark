@@ -1,19 +1,31 @@
 
 using System;
-using Framework;
-namespace Core
+using  MonoBenchmark.Framework;
+using System.Reflection;
+using System.Collections.Generic;
+
+namespace  MonoBenchmark.Core
 {
 	//Information about a TimeFixture class.
-	public class TimeFixtureInfo
+	public sealed class TimeFixtureInfo
 	{
 		private TimeFixtureAttribute attribute;
 		private Type fixtureType;
+		private ConstructorInfo constructor;
+		private List<TestMethodInfo> methods;
 		
-		public TimeFixtureInfo(TimeFixtureAttribute attribute,
-		                       Type fixtureType)
+		internal TimeFixtureInfo(TimeFixtureAttribute attribute,
+		                       Type fixtureType,ConstructorInfo constructor)
 		{
 			this.attribute = attribute;
 			this.fixtureType = fixtureType;
+			this.constructor = constructor;
+			this.methods = new List<TestMethodInfo>();
+		}
+		
+		internal void addMethod(TestMethodInfo method)
+		{
+			this.methods.Add(method);
 		}
 		
 		public TimeFixtureAttribute Attribute
@@ -28,6 +40,14 @@ namespace Core
 			get
 			{
 				return this.fixtureType;
+			}
+		}
+		
+		public ConstructorInfo @Constructor
+		{
+			get
+			{
+				return constructor;
 			}
 		}
 	}
