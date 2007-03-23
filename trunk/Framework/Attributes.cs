@@ -8,4 +8,11 @@ namespace Framework
 	{
 		
 	}
+	
+	//Indica que debe tomarse en cuenta el tiempo de ejecucion del metodo.
+	[AttributeUsageAttribute( AttributeTargets.Method)]
+	public class TimeCountAttribute : Attribute
+	{
+		
+	}
 }
