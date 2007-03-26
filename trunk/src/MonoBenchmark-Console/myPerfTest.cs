@@ -5,6 +5,7 @@ using MonoBenchmark.Framework; //That's it.
 
 namespace MonoBenchmarkConsole
 {
+#if DEBUG
 	[TimeFixture]
 	public class myPerfTest
 	{
@@ -26,11 +27,12 @@ namespace MonoBenchmarkConsole
 			System.Threading.Thread.Sleep(2000);
 		}
 		
-		[TimeCount(InvokeTimes=2)]
+		[TimeCount(InvokeTimes=1)]
 		public void Retardado()
 		{
 		 global::System.Console.WriteLine("Probando al retardado");
-			System.Threading.Thread.Sleep(500);
+			System.Threading.Thread.Sleep(20);
 		}
 	}
+#endif
 }
