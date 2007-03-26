@@ -11,6 +11,11 @@ namespace MonoBenchmark.Core
 	public class TestSession
 	{	
 		private List<TimeFixtureInfo> fixtures;
+		private int pendingFixturesForFinalization;
+		private object pendingFixturesForFinalizationLock = new Object();
+		private List<TimeFixtureResult> timeFixtureResults;
+		private TestSessionResult testResult;
+		
 		public TestSession()
 		{
 			this.fixtures = new List<Core.TimeFixtureInfo>();
@@ -52,8 +57,9 @@ namespace MonoBenchmark.Core
 				ConstructorInfo ctor = checkTypeCtor(type);
 				
 				//Create a instance in order to hold fixture information.
-				TimeFixtureInfo fixtureInfo = new TimeFixtureInfo(fixtureAtt,type,ctor);
+				TimeFixtureInfo fixtureInfo = new TimeFixtureInfo(this,fixtureAtt,type,ctor);
 				FillTestMethods(fixtureInfo);
+				fixtureInfo.initInstance();
 				//Add the fixture info to the fixtures list.
 				this.fixtures.Add(fixtureInfo);
 			}//foreach
@@ -113,5 +119,56 @@ namespace MonoBenchmark.Core
 			throw new ApplicationException(string.Format("No suitable constructor found for type {0}",target.FullName));
 		}
 		
+		private int PendingFixturesForFinalization
+		{
+			get
+			{
+				lock(this.pendingFixturesForFinalizationLock)
+					return this.pendingFixturesForFinalization;
+			}set
+			{
+				lock(this.pendingFixturesForFinalizationLock)
+					this.pendingFixturesForFinalization = value;
+			}
+		}
+		
+		internal void notifyFixtureFinalized(TimeFixtureInfo fixture)
+		{
+			//-- counter
+			int pending = --PendingFixturesForFinalization;
+			timeFixtureResults.Add(fixture.Result);
+			if(pending == 0)
+			{
+				lock(this){
+				this.testResult = new TestSessionResult(this.timeFixtureResults);
+				}
+				if(Finalized != null)
+				{
+					Finalized(this,EventArgs.Empty);
+				}
+			}
+		}
+		
+		public TestSessionResult TestResult
+		{
+			get
+			{
+				lock(this){
+				return this.testResult;
+				}
+			}
+		}
+		
+		public void Run()
+		{
+			timeFixtureResults = new List<TimeFixtureResult>(); 
+			pendingFixturesForFinalization = this.fixtures.Count;
+			foreach(TimeFixtureInfo info in this.fixtures)
+			{
+				info.Run();
+			}
+		}
+		
+		public event EventHandler Finalized;
 	}
 }
