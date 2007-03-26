@@ -32,7 +32,10 @@ namespace MonoBenchmark.Core
 			DateTime startTime = DateTime.Now;
 			ThreadPool.QueueUserWorkItem(delegate
             {
-				this.testInfo.Method.Invoke(this.fixture.FixtureInstance,null);
+				for(uint invokeCount =0;invokeCount < this.testInfo.TimeCount.InvokeTimes; invokeCount++)
+				{
+					this.testInfo.Method.Invoke(this.fixture.FixtureInstance,null);
+				}
 		
 				//Calculate Time
 				DateTime endTime = DateTime.Now;

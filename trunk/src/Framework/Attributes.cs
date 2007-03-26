@@ -13,6 +13,20 @@ namespace  MonoBenchmark.Framework
 	[AttributeUsageAttribute( AttributeTargets.Method)]
 	public class TimeCountAttribute : Attribute
 	{
+		private uint callsCount = 1;
+		public TimeCountAttribute()
+		{
+			
+		}
 		
+		public uint InvokeTimes
+		{
+			get{
+				return this.callsCount;
+			}
+			set{
+				this.callsCount = value;
+			}
+		}
 	}
 }

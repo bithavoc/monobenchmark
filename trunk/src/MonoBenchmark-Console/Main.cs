@@ -4,23 +4,27 @@ using MonoBenchmark;
 using MonoBenchmark.Core;
 using MonoBenchmark.Framework;
 
+using System.Reflection;
+
 namespace MonoBenchmarkConsole
 {
-	class MainClass
+	
+	public class MainClass
 	{
-		static void bg(string val)
-		{
-			Console.WriteLine(val);
-		}
+		public const string ApplicationVersion = "0.1.0.0";
+		public const string ApplicationDescription = "MonoBenchmark";
+		
+
 		static TestSession session;
 		public static void Main(string[] args)
 		{
-			bg("Creating Session");
+			ShowIntro();
+			debug.writeln("Creating Session");
 			
 			session = new TestSession();
 			session.LoadFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
-			bg("Session Created");
-			bg("Session Has Fixtures?=" + session.HasFixtures);
+			debug.writeln("Session Created");
+			debug.writeln("Session Has Fixtures?=" + session.HasFixtures);
 			session.Finalized+=delegate
 			{
 				debug.writeln("Finalizing...");
@@ -37,6 +41,11 @@ namespace MonoBenchmarkConsole
 			};
 			session.Run();
 			Console.ReadLine();
+		}
+		
+		static void ShowIntro()
+		{
+			Console.WriteLine("{0} {1} - Johan.Hernandez <thepumpkin1979@gmail.com>",ApplicationDescription,ApplicationVersion);
 		}
 	}
 }
