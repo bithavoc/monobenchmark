@@ -12,20 +12,31 @@ namespace MonoBenchmarkConsole
 		{
 			Console.WriteLine(val);
 		}
+		static TestSession session;
 		public static void Main(string[] args)
 		{
 			bg("Creating Session");
 			
-			TestSession session = new TestSession();
+			session = new TestSession();
 			session.LoadFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
 			bg("Session Created");
 			bg("Session Has Fixtures?=" + session.HasFixtures);
-			
-			
-			
-			
-			bg("Ending Session");
-			
+			session.Finalized+=delegate
+			{
+				debug.writeln("Finalizing...");
+				                           
+				foreach(TimeFixtureResult fixResult in session.TestResult.Result)
+				{
+					Console.WriteLine("Fixture {0}",fixResult.Fixture.FixtureType.Name);
+					foreach(TestTimeResult testResult in fixResult.TestsResult)
+					{
+						Console.WriteLine("Test:{0}\n\tTime:{1},",testResult.TestInfo.Method.Name,testResult.Time.ToString());
+					}					
+				}
+				debug.writeln("Finalized");
+			};
+			session.Run();
+			Console.ReadLine();
 		}
 	}
 }
