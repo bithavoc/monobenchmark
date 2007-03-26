@@ -3,7 +3,8 @@ using System;
 
 namespace MonoBenchmark.Core
 {
-#if DEBUG
+//#if DEBUG
+	//[System.Diagnostics.ConditionalAttribute("DEBUG")]
 	public class debug
 	{
 		
@@ -17,5 +18,5 @@ namespace MonoBenchmark.Core
 			Console.WriteLine(format,@params);
 		}
 	}
-#endif
+//#endif
 }

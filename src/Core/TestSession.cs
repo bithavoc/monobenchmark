@@ -15,7 +15,7 @@ namespace MonoBenchmark.Core
 		private object pendingFixturesForFinalizationLock = new Object();
 		private List<TimeFixtureResult> timeFixtureResults;
 		private TestSessionResult testResult;
-		
+		private TestSessionState state;
 		public TestSession()
 		{
 			this.fixtures = new List<Core.TimeFixtureInfo>();
@@ -87,14 +87,17 @@ namespace MonoBenchmark.Core
 			isTest = timeAtts.Length != 0;
 			
 			if(!isTest) return null;//skip this method.
-			
+			TimeCountAttribute timeAtt = timeAtts[0];
 			bool isPublic = method.IsPublic;
 			bool returnTypeIsVoid = method.ReturnType.FullName == "System.Void";
 			
 			if(!(isPublic && returnTypeIsVoid))
 				throw new ApplicationException(string.Format("Test Method {0} must be public and returns Void",method.Name));
 			
-			TestMethodInfo testInfo = new TestMethodInfo(method,timeAtts[0]);
+			if(timeAtt.InvokeTimes == 0)
+				throw new ApplicationException(string.Format("Test Method {0} is configured to be called zero times",method.Name));
+			
+			TestMethodInfo testInfo = new TestMethodInfo(method,timeAtt);
 			return testInfo;
 		}
 		
@@ -132,6 +135,14 @@ namespace MonoBenchmark.Core
 			}
 		}
 		
+		public TestSessionState State
+		{
+			get
+			{
+				return this.state;
+			}
+		}
+		
 		internal void notifyFixtureFinalized(TimeFixtureInfo fixture)
 		{
 			//-- counter
@@ -139,14 +150,20 @@ namespace MonoBenchmark.Core
 			timeFixtureResults.Add(fixture.Result);
 			if(pending == 0)
 			{
-				lock(this){
+				onFinalized();
+			}
+		}
+		
+		void onFinalized()
+		{
+					lock(this){
 				this.testResult = new TestSessionResult(this.timeFixtureResults);
 				}
 				if(Finalized != null)
 				{
 					Finalized(this,EventArgs.Empty);
 				}
-			}
+			this.state = TestSessionState.Finalized;
 		}
 		
 		public TestSessionResult TestResult
@@ -161,6 +178,11 @@ namespace MonoBenchmark.Core
 		
 		public void Run()
 		{
+			if(this.state == TestSessionState.Running)
+			{
+				throw new ApplicationException(string.Format("The session is already running"));
+			}
+			this.state = TestSessionState.Running;
 			timeFixtureResults = new List<TimeFixtureResult>(); 
 			pendingFixturesForFinalization = this.fixtures.Count;
 			foreach(TimeFixtureInfo info in this.fixtures)

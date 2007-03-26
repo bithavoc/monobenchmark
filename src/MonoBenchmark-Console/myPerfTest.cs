@@ -26,7 +26,7 @@ namespace MonoBenchmarkConsole
 			System.Threading.Thread.Sleep(2000);
 		}
 		
-		[TimeCount]
+		[TimeCount(InvokeTimes=2)]
 		public void Retardado()
 		{
 		 global::System.Console.WriteLine("Probando al retardado");

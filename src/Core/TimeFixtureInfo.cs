@@ -103,9 +103,8 @@ namespace  MonoBenchmark.Core
 		
 		void finalizeTest()
 		{
-				result = new TimeFixtureResult(this,testResult);
+			result = new TimeFixtureResult(this,testResult);
 			this.session.notifyFixtureFinalized(this);
-			
 		}
 		
 		public void Run()
