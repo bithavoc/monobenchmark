@@ -25,5 +25,12 @@ namespace MonoBenchmarkConsole
 		 global::System.Console.WriteLine("what the matter TWO??");
 			System.Threading.Thread.Sleep(2000);
 		}
+		
+		[TimeCount]
+		public void Retardado()
+		{
+		 global::System.Console.WriteLine("Probando al retardado");
+			System.Threading.Thread.Sleep(500);
+		}
 	}
 }
