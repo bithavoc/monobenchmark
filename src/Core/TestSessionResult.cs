@@ -17,10 +17,7 @@ namespace MonoBenchmark.Core
 		{
 			get
 			{
-				lock(this)
-				{
 				return this.result;
-				}
 			}
 		}
 	}

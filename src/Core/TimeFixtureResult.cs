@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 namespace MonoBenchmark.Core
 {
-	
-	
 	public class TimeFixtureResult
 	{
 		private List<TestTimeResult> results;
