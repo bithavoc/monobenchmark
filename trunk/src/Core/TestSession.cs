@@ -10,6 +10,7 @@ namespace MonoBenchmark.Core
 {
 	public class TestSession
 	{	
+		private string assemblyName;
 		private List<TimeFixtureInfo> fixtures;
 		private int pendingFixturesForFinalization;
 		private object pendingFixturesForFinalizationLock = new Object();
@@ -29,6 +30,13 @@ namespace MonoBenchmark.Core
 				return this.fixtures.Count != 0;
 			}
 		}
+		
+		public string AssemblyName
+		{
+			get{
+				return this.assemblyName;
+			}
+		}
 		public void LoadFromAssembly(string assemblyPath)
 		{
 			//Check file.
@@ -38,6 +46,7 @@ namespace MonoBenchmark.Core
 			}
 			
 			Assembly asm = Assembly.LoadFile(assemblyPath);
+			this.assemblyName = asm.FullName;
 			LoadFromAssembly(asm);
 		}
 		public void LoadFromAssembly(Assembly asm)

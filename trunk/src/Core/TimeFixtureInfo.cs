@@ -18,15 +18,23 @@ namespace  MonoBenchmark.Core
 		private object pendingForFinalizeLock = new Object();
 		private TestSession session;
 		private List<TestTimeResult> testResult = null;
-		
+		private string fixtureName;
 		internal TimeFixtureInfo(TestSession session,TimeFixtureAttribute attribute,
 		                       Type fixtureType,ConstructorInfo constructor)
 		{
 			this.session = session;
 			this.attribute = attribute;
 			this.fixtureType = fixtureType;
+			this.fixtureName = this.fixtureType.Name;
 			this.constructor = constructor;
 			this.methods = new List<TestMethodInfo>();
+		}
+		
+		public string Name
+		{
+			get{
+				return this.fixtureName;
+			}
 		}
 		
 		internal void initInstance()

@@ -9,6 +9,7 @@ namespace MonoBenchmark.Core
 		private DateTime endTime;
 		private TimeSpan time;
 		private TestMethodInfo methodInfo;
+
 		public TestTimeResult(TestMethodInfo methodInfo,DateTime startTime,DateTime endTime,TimeSpan time)
 		{
 			this.methodInfo = methodInfo;
@@ -16,6 +17,7 @@ namespace MonoBenchmark.Core
 			this.endTime = endTime;
 			this.time = time;
 		}
+
 		public TestMethodInfo TestInfo
 		{
 			get{
