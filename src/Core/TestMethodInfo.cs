@@ -9,11 +9,21 @@ namespace MonoBenchmark.Core
 	{
 		private MethodInfo method;
 		private TimeCountAttribute timeCountAtt;
+		private string name;
 		
 		public TestMethodInfo(MethodInfo method, TimeCountAttribute timeCountAtt)
 		{
 			this.method = method;
 			this.timeCountAtt = timeCountAtt;
+			this.name = method.Name;
+		}
+				
+		public string Name
+		{
+			get
+			{
+				return this.name;
+			}
 		}
 		public MethodInfo Method
 		{
