@@ -1,4 +1,3 @@
-
 using System;
 
 namespace MonoBenchmark.Core.Analysis
