@@ -1,7 +1,8 @@
-OUTDIR = Debug
+all: MonoBenchmark.Core.dll
 
-all: MonoBenchmark.dll
+Framework:
+	cd ../Framework && $(MAKE)
 
-MonoBenchmark.dll:
-	gmcs /target:library /out:bin/$(OUTDIR)/MonoBenchmark.dll -r:System.Xml.dll *.cs
+MonoBenchmark.Core.dll: Framework
+	gmcs /target:library /out:"../libs/MonoBenchmark.Core.dll" /r:System.Xml.dll /r:"../libs/MonoBenchmark.Framework.dll" *.cs Analysis/*
 
