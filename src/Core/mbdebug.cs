@@ -4,7 +4,6 @@ using System;
 namespace MonoBenchmark.Core
 {
 //#if DEBUG
-	//[System.Diagnostics.ConditionalAttribute("DEBUG")]
 	public class debug
 	{
 		
