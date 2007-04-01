@@ -19,7 +19,7 @@ namespace  MonoBenchmark.Framework
 			
 		}
 		
-		public uint InvokeTimes
+		public uint Workers
 		{
 			get{
 				return this.callsCount;

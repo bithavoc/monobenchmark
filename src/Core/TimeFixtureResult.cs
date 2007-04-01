@@ -4,11 +4,14 @@ using System.Collections.Generic;
 
 namespace MonoBenchmark.Core
 {
+	// <summary>
+	// A CLR Type Time Fixture Result.
+	// <summary>
 	public class TimeFixtureResult
 	{
-		private List<TestTimeResult> results;
+		private List<MethodTimeResult> results;
 		private TimeFixtureInfo fixture;
-		public TimeFixtureResult(TimeFixtureInfo fixture, List<TestTimeResult> result)
+		public TimeFixtureResult(TimeFixtureInfo fixture, List<MethodTimeResult> result)
 		{
 			this.results = result; 
 			this.fixture = fixture;
@@ -20,7 +23,7 @@ namespace MonoBenchmark.Core
 				return this.fixture;
 			}
 		}
-		public List<TestTimeResult> TestsResult
+		public List<MethodTimeResult> TestsResult
 		{
 			get
 			{

@@ -103,7 +103,7 @@ namespace MonoBenchmark.Core
 			if(!(isPublic && returnTypeIsVoid))
 				throw new ApplicationException(string.Format("Test Method {0} must be public and returns Void",method.Name));
 			
-			if(timeAtt.InvokeTimes == 0)
+			if(timeAtt.Workers == 0)
 				throw new ApplicationException(string.Format("Test Method {0} is configured to be called zero times",method.Name));
 			
 			TestMethodInfo testInfo = new TestMethodInfo(method,timeAtt);

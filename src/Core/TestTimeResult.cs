@@ -8,26 +8,29 @@ namespace MonoBenchmark.Core
 		private DateTime startTime;
 		private DateTime endTime;
 		private TimeSpan time;
-		private TestMethodInfo methodInfo;
-
-		public TestTimeResult(TestMethodInfo methodInfo,DateTime startTime,DateTime endTime,TimeSpan time)
+		private MethodTimeResult methodResult;
+		private int index;
+		public TestTimeResult(int index,MethodTimeResult methodResult,DateTime startTime,DateTime endTime,TimeSpan time)
 		{
-			this.methodInfo = methodInfo;
+			this.index = index;
+			this.methodResult = methodResult;
 			this.startTime = startTime;
 			this.endTime = endTime;
 			this.time = time;
 		}
 
-		public TestMethodInfo TestInfo
+		public MethodTimeResult TestResult
 		{
-			get{
-				return this.methodInfo;
+			get
+			{
+				return this.methodResult;
 			}
 		}
 		
 		public  DateTime StartTime
 		{
-			get{
+			get
+			{
 				return this.startTime;
 			}
 		}
@@ -41,6 +44,12 @@ namespace MonoBenchmark.Core
 		{
 			get{
 			return this.time;
+			}
+		}
+		public int Index
+		{
+			get{
+				return this.index;
 			}
 		}
 	}

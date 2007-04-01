@@ -8,5 +8,9 @@ namespace MonoBenchmark.Core.Analysis
 		{
 			
 		}
+		public SessionCompareResult Compare()
+		{
+			return null;
+		}
 	}
 }

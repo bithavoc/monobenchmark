@@ -36,10 +36,12 @@ namespace MonoBenchmarkConsole
 				writeErrorAndExit("Assembly file missing. Use -a:filename.dll");
 				ShowUsage();
 			}
+
 			if(!System.IO.File.Exists(assemblyName))
 			{
 				writeErrorAndExit(string.Format("Assembly '{0}' not found",assemblyName));
 			}
+
 			string outputFile;
 			GetArgValue(args[1],out outputFile);
 			if(string.IsNullOrEmpty(outputFile))
@@ -52,22 +54,25 @@ namespace MonoBenchmarkConsole
 			{
 				writeErrorAndExit("The Assembly has not time-fixtures defined. Use another assembly.");
 			}
+
 			Console.WriteLine("Loaded Test");
-			
 			debug.writeln("Session Created");
 			debug.writeln("Session Has Fixtures?=" + session.HasFixtures);
 			
 			session.Finalized+=delegate
 			{
-				Console.WriteLine("Test Finalized\n\tSummary:");
-				                           
+				Console.WriteLine("Test Finalized\n\tSummary:");                     
 				foreach(TimeFixtureResult fixResult in session.TestResult.Result)
 				{
 					Console.WriteLine("\tFixture {0}",fixResult.Fixture.Name);
-					foreach(TestTimeResult testResult in fixResult.TestsResult)
+					foreach(MethodTimeResult mTestResult in fixResult.TestsResult)				
 					{
-						Console.WriteLine("\t\tTest:{0}\n\t\t\tTime:{1},",testResult.TestInfo.Method.Name,testResult.Time.ToString());
-					}					
+						Console.WriteLine("\t\tTest :{0}",mTestResult.TestInfo.Name);
+						foreach(TestTimeResult testResult in mTestResult.Results)
+						{
+							Console.WriteLine("\t\t\t{0}. Time: {1},",(testResult.Index + 1),testResult.Time.ToString());
+						}					
+					}
 				}
 				Console.WriteLine("\tSummary End");
 				WriteOutXml(outputFile);
@@ -85,6 +90,7 @@ namespace MonoBenchmarkConsole
 		{
 			value = null;
 			string[] split =input.Split(':');
+
 			if(split.Length < 2)
 			{
 				value= null;
@@ -129,24 +135,25 @@ namespace MonoBenchmarkConsole
 				XmlAttribute att = doc.CreateAttribute("name");
 				att.Value = fixResult.Fixture.Name;
 				fixtureEle.Attributes.Append(att);
-				
-				
-				foreach(TestTimeResult testResult in fixResult.TestsResult)
+				foreach(MethodTimeResult mTestResult in fixResult.TestsResult)				
 				{
-					XmlElement testEle = doc.CreateElement("test");
-					fixtureEle.AppendChild(testEle);
-					
-					att = doc.CreateAttribute("name");
-					att.Value = testResult.TestInfo.Name;
-					testEle.Attributes.Append(att);
-					
-					XmlElement timeEle = doc.CreateElement("time");
-					testEle.AppendChild(timeEle);
-					addAtt(timeEle,"startTime",formatDateTimeXml(testResult.StartTime));
-					addAtt(timeEle,"endTime",formatDateTimeXml(testResult.EndTime));
-					addAtt(timeEle,"time",testResult.Time.Ticks.ToString());
-					
-				}			
+						XmlElement testEle = doc.CreateElement("test");
+						fixtureEle.AppendChild(testEle);
+						
+						att = doc.CreateAttribute("name");
+						att.Value = mTestResult.TestInfo.Name;
+						testEle.Attributes.Append(att);
+					foreach(TestTimeResult testResult in mTestResult.Results)
+					{
+						XmlElement timeEle = doc.CreateElement("time");
+						testEle.AppendChild(timeEle);
+						addAtt(timeEle,"id",testResult.Index.ToString());
+						addAtt(timeEle,"startTime",formatDateTimeXml(testResult.StartTime));
+						addAtt(timeEle,"endTime",formatDateTimeXml(testResult.EndTime));
+						addAtt(timeEle,"time",testResult.Time.Ticks.ToString());
+						
+					}		
+				}	
 			}
 			XmlWriterSettings settings = new XmlWriterSettings();
 			settings.Indent = true;
@@ -156,7 +163,7 @@ namespace MonoBenchmarkConsole
 				doc.WriteContentTo( writer);
 				Console.WriteLine("Output '{0}' Written",filename);
 #if DEBUG
-				System.Diagnostics.Process.Start("gedit result.xml");
+				System.Diagnostics.Process.Start("gedit " + filename);
 #endif
 			}
 		}
