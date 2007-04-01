@@ -17,7 +17,7 @@ namespace  MonoBenchmark.Core
 		private int pendingForFinalize =0;
 		private object pendingForFinalizeLock = new Object();
 		private TestSession session;
-		private List<TestTimeResult> testResult = null;
+		private List<MethodTimeResult> testResult = null;
 		private string fixtureName;
 		internal TimeFixtureInfo(TestSession session,TimeFixtureAttribute attribute,
 		                       Type fixtureType,ConstructorInfo constructor)
@@ -117,7 +117,7 @@ namespace  MonoBenchmark.Core
 		
 		public void Run()
 		{
-			testResult = new List<TestTimeResult>();
+			testResult = new List<MethodTimeResult>();
 			
 			//All the methods are pending for finalize.
 			PendingForFinalize = this.methods.Count;

@@ -8,6 +8,7 @@ namespace MonoBenchmark.Core
 		//private TestingWorkerState state;
 		private TimeFixtureInfo fixture;
 		private TestMethodInfo testInfo;
+		private MethodTimeResult testMethodResult = null;
 		
 		private TestingWorker(TimeFixtureInfo fixture,TestMethodInfo testInfo)
 		{
@@ -20,31 +21,61 @@ namespace MonoBenchmark.Core
 			TestingWorker worker = new TestingWorker(fixture,testInfo);
 			return worker;
 		}
-		private TestTimeResult testResult;
-		public TestTimeResult TestResult
+
+
+		public MethodTimeResult TestResult
 		{
-			get{
-				return this.testResult;
+			get
+			{
+				return this.testMethodResult;
 			}
 		}
+
+		private int workers = 0;
+		private object workers_lock = new object();
+		private int WorkersCount
+		{
+			get
+			{
+				lock(workers_lock)
+				{
+					return workers;
+				}
+			}
+			set
+			{
+				lock(workers_lock)
+				{
+					workers = value;
+				}
+			}
+		}
+
 		public void Run()
 		{
-			DateTime startTime = DateTime.Now;
-			ThreadPool.QueueUserWorkItem(delegate
-            {
-				for(uint invokeCount =0;invokeCount < this.testInfo.TimeCount.InvokeTimes; invokeCount++)
+			this.testMethodResult = new MethodTimeResult(this.testInfo);
+				for(uint invokeCount =0;invokeCount < this.testInfo.TimeCount.Workers; invokeCount++)
 				{
-					this.testInfo.Method.Invoke(this.fixture.FixtureInstance,null);
-				}
-		
-				//Calculate Time
-				DateTime endTime = DateTime.Now;
-				TimeSpan time = endTime - startTime;
-				testResult = new TestTimeResult(this.testInfo,startTime,endTime,time);
-				//debug.writeln("Worker ends!,Time={0}",time.ToString());
-				this.fixture.notifyWorkerFinalization(this); //I have finished.
-				//debug.writeln("After Notify!");
-			});
+					ThreadPool.QueueUserWorkItem(delegate
+				            	{
+
+							DateTime startTime = DateTime.Now;
+							this.testInfo.Method.Invoke(this.fixture.FixtureInstance,null);
+					
+							//Calculate Time
+							DateTime endTime = DateTime.Now;
+							TimeSpan time = endTime - startTime;
+							TestTimeResult testResult = new TestTimeResult(WorkersCount,testMethodResult,startTime,endTime,time);
+							this.TestResult.Results.Add(testResult);
+//debug.writeln("Worker ends!,Time={0}",time.ToString());
+							WorkersCount++;
+							if(WorkersCount == this.testInfo.TimeCount.Workers)
+							{
+								this.fixture.notifyWorkerFinalization(this); //I have finished.
+							}
+							//debug.writeln("After Notify!");
+						});
+			}
 		}
 		
 		/*public TestingWorkerState State

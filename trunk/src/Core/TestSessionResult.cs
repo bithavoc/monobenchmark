@@ -6,8 +6,7 @@ namespace MonoBenchmark.Core
 {
 	public class TestSessionResult
 	{
-		private List<TimeFixtureResult> result;  
-		
+		private List<TimeFixtureResult> result;
 		public TestSessionResult( List<TimeFixtureResult> result)
 		{
 			this.result = result;
