@@ -29,7 +29,7 @@ namespace MonoBenchmarkConsole
 
 //		int u_val = 0;
 const int SLEEP_VAL = 5000;
-		[TimeCount(Workers=1000)]
+		[TimeCount(Workers=10)]
 		public void Retardado()
 		{
 //		u_val+=10;
