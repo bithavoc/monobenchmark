@@ -1,14 +1,14 @@
-#summary Roadmap
+#summary Roadmap for Release 1.0
 #labels Featured
 
 = Features =
-  * Linear perfomance comparison
-  * Command Line Utility
+  * ~~Autotool Compilation~~
+  * ~~Linear perfomance comparison~~
+  * ~~Command Line Utility~~
   * GTK# UI Utility
-
-= Future Features =
   * MonoDevelop Add-In
   * Graphical Benchmark Presentation
+
 
 
 
