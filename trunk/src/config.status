@@ -331,7 +331,7 @@ Copyright (C) 2006 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/home/jhernandez/development/monobenchmark/monobenchmark'
+ac_pwd='/home/jhernandez/development/benchmark/src'
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 # If no file are specified by the user, then we need to provide default
@@ -527,19 +527,19 @@ s,@INSTALL_DATA@,|#_!!_#|${INSTALL} -m 644,g
 s,@CYGPATH_W@,|#_!!_#|echo,g
 s,@PACKAGE@,|#_!!_#|monobenchmark,g
 s,@VERSION@,|#_!!_#|0.1,g
-s,@ACLOCAL@,|#_!!_#|${SHELL} /home/jhernandez/development/monobenchmark/monobenchmark/missing --run aclocal-1.9,g
-s,@AUTOCONF@,|#_!!_#|${SHELL} /home/jhernandez/development/monobenchmark/monobenchmark/missing --run autoconf,g
-s,@AUTOMAKE@,|#_!!_#|${SHELL} /home/jhernandez/development/monobenchmark/monobenchmark/missing --run automake-1.9,g
-s,@AUTOHEADER@,|#_!!_#|${SHELL} /home/jhernandez/development/monobenchmark/monobenchmark/missing --run autoheader,g
-s,@MAKEINFO@,|#_!!_#|${SHELL} /home/jhernandez/development/monobenchmark/monobenchmark/missing --run makeinfo,g
-s,@install_sh@,|#_!!_#|/home/jhernandez/development/monobenchmark/monobenchmark/install-sh,g
+s,@ACLOCAL@,|#_!!_#|${SHELL} /home/jhernandez/development/benchmark/src/missing --run aclocal-1.9,g
+s,@AUTOCONF@,|#_!!_#|${SHELL} /home/jhernandez/development/benchmark/src/missing --run autoconf,g
+s,@AUTOMAKE@,|#_!!_#|${SHELL} /home/jhernandez/development/benchmark/src/missing --run automake-1.9,g
+s,@AUTOHEADER@,|#_!!_#|${SHELL} /home/jhernandez/development/benchmark/src/missing --run autoheader,g
+s,@MAKEINFO@,|#_!!_#|${SHELL} /home/jhernandez/development/benchmark/src/missing --run makeinfo,g
+s,@install_sh@,|#_!!_#|/home/jhernandez/development/benchmark/src/install-sh,g
 s,@STRIP@,|#_!!_#|,g
 s,@INSTALL_STRIP_PROGRAM@,|#_!!_#|${SHELL} $(install_sh) -c -s,g
 s,@mkdir_p@,|#_!!_#|mkdir -p --,g
 s,@AWK@,|#_!!_#|mawk,g
 s,@SET_MAKE@,|#_!!_#|,g
 s,@am__leading_dot@,|#_!!_#|.,g
-s,@AMTAR@,|#_!!_#|${SHELL} /home/jhernandez/development/monobenchmark/monobenchmark/missing --run tar,g
+s,@AMTAR@,|#_!!_#|${SHELL} /home/jhernandez/development/benchmark/src/missing --run tar,g
 s,@am__tar@,|#_!!_#|${AMTAR} chof - "$$tardir",g
 s,@am__untar@,|#_!!_#|${AMTAR} xf -,g
 s,@MAINTAINER_MODE_TRUE@,|#_!!_#|,g
