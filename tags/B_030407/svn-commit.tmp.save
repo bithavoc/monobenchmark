@@ -1,0 +1,25 @@
+|'
+--This line, and those below, will be ignored--
+
+A    MonoBenchmark.mds
+A    Core
+A    Core/MyClass.cs
+A    Core/AssemblyInfo.cs
+A    Core/TimeFixtureInfo.cs
+A    Core/Core.mdp
+A    Core/TestSession.cs
+A    Core/bin
+A    Core/bin/Debug
+AM   Core/bin/Debug/MonoBenchmark.Core.dll
+AM   Core/bin/Debug/MonoBenchmark.Core.dll.mdb
+A    Core/bin/Debug/MonoBenchmark.Core.xml
+AM   Core/bin/Debug/MonoBenchmark.Framework.dll
+AM   Core/bin/Debug/MonoBenchmark.Framework.dll.mdb
+A    Framework
+A    Framework/AssemblyInfo.cs
+A    Framework/bin
+A    Framework/bin/Debug
+AM   Framework/bin/Debug/MonoBenchmark.Framework.dll
+AM   Framework/bin/Debug/MonoBenchmark.Framework.dll.mdb
+A    Framework/Attributes.cs
+A    Framework/Framework.mdp

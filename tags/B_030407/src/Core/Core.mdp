@@ -1,0 +1,37 @@
+<Project name="MonoBenchmark.Core" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Debug" assembly="MonoBenchmark.Core" />
+      <Build debugmode="True" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Csc" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" mainclass="" generatexmldocumentation="True" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Release" assembly="Core" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Csc" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="./AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="./TestSession.cs" subtype="Code" buildaction="Compile" />
+    <File name="./TimeFixtureInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="./TestingWorker.cs" subtype="Code" buildaction="Compile" />
+    <File name="./TestingWorkerState.cs" subtype="Code" buildaction="Compile" />
+    <File name="./TestMethodInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="./TestTimeResult.cs" subtype="Code" buildaction="Compile" />
+    <File name="./TimeFixtureResult.cs" subtype="Code" buildaction="Compile" />
+    <File name="./TestSessionResult.cs" subtype="Code" buildaction="Compile" />
+    <File name="./mbdebug.cs" subtype="Code" buildaction="Compile" />
+    <File name="./TestSessionState.cs" subtype="Code" buildaction="Compile" />
+    <File name="./sampleSummary.xml" subtype="Code" buildaction="Compile" />
+    <File name="./Analysis" subtype="Directory" buildaction="Compile" />
+    <File name="./Analysis/SessionsAnalizer.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Analysis/SessionComparer.cs" subtype="Code" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Project" localcopy="True" refto="MonoBenchmark.Framework" />
+  </References>
+</Project>
