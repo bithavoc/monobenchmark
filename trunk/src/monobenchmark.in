@@ -1,0 +1,2 @@
+#!/bin/sh
+exec @MONO@ @prefix@/lib/monobenchmark/MonoBenchmark-Console.exe $MONO_EXTRA_ARGS "$@"
