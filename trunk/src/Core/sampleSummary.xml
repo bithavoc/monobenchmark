@@ -1,9 +1,0 @@
-<testSummary assemblyName="">
-	<fixture name="fixture1">
-		<tests>
-			<test name="metodo1">
-				<time start="" end="" total=""/>
-			</test>
-		</tests>
-	</fixture>
-</testSummary>
