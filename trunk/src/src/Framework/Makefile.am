@@ -12,6 +12,8 @@ mbframework_build_sources = $(addprefix $(srcdir)/, $(mbframework_sources))
 mbframework_build_sources += $(mbframework_generated_sources)
 
 MonoBenchmark.Framework.dll: $(mbframework_build_sources)
+	echo API VERSION
+	echo $(PACKAGE_VERSION)
 	$(MCS) /target:library -out:$@ $(mbframework_build_sources)
 
 # Install Unstable Mono Libraries (see configure.ac)

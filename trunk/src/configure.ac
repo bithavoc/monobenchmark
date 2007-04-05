@@ -1,6 +1,6 @@
-AC_INIT(README)
+AC_INIT([monobenchmark],[0.1])
 AC_CANONICAL_SYSTEM
-AM_INIT_AUTOMAKE(monobenchmark, 0.1)
+AM_INIT_AUTOMAKE([1.9 tar-ustar])
 AM_MAINTAINER_MODE
 
 AC_PROG_INSTALL
@@ -17,8 +17,7 @@ AC_PATH_PROG(MONO, mono, no)
 
 CS="C#"
 if test "x$GMCS" = "xno" ; then
-	dnl AC_MSG_ERROR([You need to install a C# compiler with 2.0(Generics,Partial Classes, Anonynous Methods) Support. Try install GMCS])
-	AC_MSG_ERROR([No $CS compiler found])
+	AC_MSG_ERROR([You need to install a $CS compiler with 2.0(Generics,Partial Classes, Anonynous Methods) Support. Try install GMCS])
 fi
 
 MCS=$GMCS
@@ -28,19 +27,21 @@ if test "x$MONO" = "xno"; then
 fi
 
 dnl gtk-sharp
-GTKSHARP_REQUIRED_VERSION=1.0
-PKG_CHECK_MODULES(GTKSHARP, gtk-sharp >= $GTKSHARP_REQUIRED_VERSION)
+dnl GTKSHARP_REQUIRED_VERSION=1.0
+dnl PKG_CHECK_MODULES(GTKSHARP, gtk-sharp >= $GTKSHARP_REQUIRED_VERSION)
 
 AC_SUBST(MCS)
+AC_SUBST(VERSION)
 
 dnl find assembly paths for unstable installed assemblies that will be
 dnl copied into monoskel installation directory for local usage with the app
-UNSTABLE_INSTALL_ASSEMBLIES="superstring-sharp"
+dnl UNSTABLE_INSTALL_ASSEMBLIES="superstring-sharp"
 INSTALLED_ASSEMBLIES="`$PKG_CONFIG --variable=Libraries $UNSTABLE_INSTALL_ASSEMBLIES`"
 AC_SUBST(INSTALLED_ASSEMBLIES)
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
+src/Makefile
 src/Framework/Makefile
 src/Framework/AssemblyInfo.cs
 src/Core/Makefile
@@ -49,18 +50,14 @@ src/Console/Makefile
 src/Console/AssemblyInfo.cs
 ])
 
+AC_OUTPUT
+
 dnl Configuration summary
 echo ""
 echo "Configuration summary"
 echo ""
 echo "   * Installation prefix = $prefix"
 echo "   * $CS compiler: $MCS"
+echo "   * if you want to install monobenchmark, use $make && make install"
+echo "   * if you have any issue compiling, please contact me a thepumpkin1979@gmail.com"
 echo ""
-
-if test "$UNSTABLE_INSTALL_ASSEMBLIES" = "superstring-sharp" ; then
-  echo "*********************************************************************************"
-  echo " This is the monobenchmark configure script; it includes a dependency on superstring."
-  echo " Don't forget to remove this dependency in the configure.ac script if you intend"
-  echo " to use it in your own project."
-  echo "*********************************************************************************"
-fi

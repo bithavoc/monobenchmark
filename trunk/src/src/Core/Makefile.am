@@ -16,6 +16,9 @@ mbcore_build_sources += $(mbcore_generated_sources)
 MonoBenchmark.Core.dll: $(mbcore_build_sources)
 	echo COMPILANDO CORE
 	echo $(top_builddir)
+	ls $(top_builddir)
+	echo DATAROOTDIR
+	echo $(datarootdir)
 	$(MCS) /target:library /r:$(top_builddir)/src/Framework/MonoBenchmark.Framework.dll -out:$@ $(mbcore_build_sources)
 
 # Install Unstable Mono Libraries (see configure.ac)

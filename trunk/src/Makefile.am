@@ -1,19 +1,14 @@
-SUBDIRS = src/Framework src/Core src/Console
+SUBDIRS = src
 bin_SCRIPTS = monobenchmark
 EXTRA_DIST = monobenchmark.in
 
-REWRITE = \
-	sed -e "s|\@prefix\@|$(prefix)|g"       \
-	    -e "s|\@pkglibdir\@|$(pkglibdir)|g" \
-	    -e "s|\@bindir\@|$(bindir)|g"		\
-	    -e "s|\@MONO\@|$(MONO)|g" 
-
 $(bin_SCRIPTS): $(srcdir)/monobenchmark.in Makefile
-	$(REWRITE) $(srcdir)/monobenchmark.in > $@.tmp
 	mv $@.tmp $@
 
 CLEANFILES = \
 	monobenchmark
+
+
 
 DISTCLEANFILES = \
 	configure \
