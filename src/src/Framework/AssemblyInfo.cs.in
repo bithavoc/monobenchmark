@@ -7,7 +7,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyVersion("@VERSION@")]
+[assembly: AssemblyVersion("@PACKAGE_VERSION@")]
 [assembly: AssemblyTitle ("Skeleton Project")]
 [assembly: AssemblyDescription ("Something fancy here")]
 [assembly: AssemblyCopyright ("Copyright (c) 2004 Novell, Inc.")]

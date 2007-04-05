@@ -12,6 +12,8 @@ mbconsole_build_sources = $(addprefix $(srcdir)/, $(mbconsole_sources))
 mbconsole_build_sources += $(mbconsole_generated_sources)
 
 MonoBenchmark-Console.exe: $(mbconsole_build_sources)
+	echo DATAROOTDIR
+	echo $(datarootdir)
 	$(MCS) /target:exe /r:$(top_builddir)/src/Framework/MonoBenchmark.Framework.dll /r:$(top_builddir)/src/Core/MonoBenchmark.Core.dll -out:$@ $(mbconsole_build_sources)
 
 # Install Unstable Mono Libraries (see configure.ac)
