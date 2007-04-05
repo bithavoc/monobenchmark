@@ -1,0 +1,4 @@
+MILESTONE_NAME=monobenchmark-milestone.tar.gz
+echo Creating Milestone. Please wait...
+tar cvfz $MILESTONE_NAME ../src/*
+echo 'Milestone Created'
