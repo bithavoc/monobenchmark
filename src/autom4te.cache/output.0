@@ -2582,7 +2582,7 @@ fi
 INSTALLED_ASSEMBLIES="`$PKG_CONFIG --variable=Libraries $UNSTABLE_INSTALL_ASSEMBLIES`"
 
 
-ac_config_files="$ac_config_files Makefile src/Makefile src/Framework/Makefile src/Framework/AssemblyInfo.cs src/Core/Makefile src/Core/AssemblyInfo.cs src/Console/Makefile src/Console/AssemblyInfo.cs"
+ac_config_files="$ac_config_files Makefile src/Makefile src/Framework/Makefile src/Framework/AssemblyInfo.cs src/Core/Makefile src/Core/AssemblyInfo.cs src/Console/Makefile src/Console/AssemblyInfo.cs monobenchmark-framework.pc"
 
 
 cat >confcache <<\_ACEOF
@@ -3155,6 +3155,7 @@ do
     "src/Core/AssemblyInfo.cs") CONFIG_FILES="$CONFIG_FILES src/Core/AssemblyInfo.cs" ;;
     "src/Console/Makefile") CONFIG_FILES="$CONFIG_FILES src/Console/Makefile" ;;
     "src/Console/AssemblyInfo.cs") CONFIG_FILES="$CONFIG_FILES src/Console/AssemblyInfo.cs" ;;
+    "monobenchmark-framework.pc") CONFIG_FILES="$CONFIG_FILES monobenchmark-framework.pc" ;;
 
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
