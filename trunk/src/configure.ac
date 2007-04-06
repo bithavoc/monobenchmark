@@ -47,6 +47,7 @@ src/Core/Makefile
 src/Core/AssemblyInfo.cs
 src/Console/Makefile
 src/Console/AssemblyInfo.cs
+monobenchmark-framework.pc
 ])
 
 AC_OUTPUT

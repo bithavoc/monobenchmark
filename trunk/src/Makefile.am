@@ -1,6 +1,9 @@
 SUBDIRS = src
-bin_SCRIPTS = monobenchmark monobenchmark-framework.pc
-EXTRA_DIST = monobenchmark.in monobenchmark-framework.pc.in
+bin_SCRIPTS = monobenchmark
+EXTRA_DIST = monobenchmark.in
+
+pkgconfigdir = $(prefix)/lib/pkgconfig
+pkgconfig_DATA = monobenchmark-framework.pc
 
 REWRITE = \
 	sed -e "s|\@prefix\@|$(prefix)|g"       \
@@ -10,10 +13,6 @@ REWRITE = \
 
 $(bin_SCRIPTS): $(srcdir)/monobenchmark.in Makefile
 	$(REWRITE) $(srcdir)/monobenchmark.in > $@.tmp
-	mv $@.tmp $@
-
-monobenchmark-framework.pc: $(srcdir)/monobenchmark-framework.pc.in Makefile
-	$(REWRITE) $(srcdir)/monobenchmark-framework.pc.in > $@.tmp
 	mv $@.tmp $@
 
 CLEANFILES = monobenchmark monobenchmark-framework.pc
