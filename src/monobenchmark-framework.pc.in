@@ -1,0 +1,8 @@
+prefix=@prefix@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+                                                                                
+Name: monobenchmark-framework
+Description: monobenchmark-framework
+Version: @PACKAGE_VERSION@
+Libs: -r:${libdir}/monobenchmark/MonoBenchmark.Framework.dll
