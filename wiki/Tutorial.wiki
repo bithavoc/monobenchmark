@@ -75,11 +75,11 @@ The content is like the following:
   <fixtures>
     <fixture name="PerfomanceFixture1">
       <test name="WorkloadTest">
-        <time id="0" startTime="04/06/2007 14:17:04" endTime="04/06/2007 14:17:04" time="451120" />
-        <time id="1" startTime="04/06/2007 14:17:04" endTime="04/06/2007 14:17:04" time="377900" />
+        <time id="0" startTime="04/06/2007 17:51:34" endTime="04/06/2007 17:51:34" time="00:00:00.0471280" />
+        <time id="1" startTime="04/06/2007 17:51:34" endTime="04/06/2007 17:51:34" time="00:00:00.0452540" />
       </test>
       <test name="Test1">
-        <time id="0" startTime="04/06/2007 14:17:04" endTime="04/06/2007 14:17:05" time="2027810" />
+        <time id="0" startTime="04/06/2007 17:51:34" endTime="04/06/2007 17:51:34" time="00:00:00.2043350" />
       </test>
     </fixture>
   </fixtures>
