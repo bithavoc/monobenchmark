@@ -150,7 +150,7 @@ namespace MonoBenchmarkConsole
 						addAtt(timeEle,"id",testResult.Index.ToString());
 						addAtt(timeEle,"startTime",formatDateTimeXml(testResult.StartTime));
 						addAtt(timeEle,"endTime",formatDateTimeXml(testResult.EndTime));
-						addAtt(timeEle,"time",testResult.Time.Ticks.ToString());
+						addAtt(timeEle,"time",testResult.Time.ToString());
 						
 					}		
 				}	
