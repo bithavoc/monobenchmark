@@ -1,4 +1,5 @@
 #summary Installation Instructions
+#labels Featured,Phase-Deploy
 
 You will need compile the project and then install.
 ===Dependencies====
