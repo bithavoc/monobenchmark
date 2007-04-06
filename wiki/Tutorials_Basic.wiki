@@ -22,8 +22,29 @@ Copy and Paste the following code:
 
 {{{
 
+using System;
+using MonoBenchmark.Framework;
+
+[TimeFixture]
+public class PerfomanceFixture1
+{
+        [TimeCount]
+        public void Test1()
+        {
+                System.Threading.Thread.Sleep(200); //Delay 200 Milliseconds
+        }
+        [TimeCount(Workers=2)]
+        public void WorkloadTest()
+        {
+                System.Threading.Thread.Sleep(20);
+        }
+}
+
 }}}
 
+Now we compile the test.
+
+`gmcs -pkg:monobenchmark-framework /out:perfomance.dll /target:library perfomance.cs`
 
 
 
