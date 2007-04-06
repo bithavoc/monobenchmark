@@ -15,6 +15,9 @@ $(bin_SCRIPTS): $(srcdir)/monobenchmark.in Makefile
 	$(REWRITE) $(srcdir)/monobenchmark.in > $@.tmp
 	mv $@.tmp $@
 
+run-console: all
+	$(mono) src/Console/MonoBenchmark-Console.exe
+
 CLEANFILES = monobenchmark monobenchmark-framework.pc
 
 DISTCLEANFILES = \

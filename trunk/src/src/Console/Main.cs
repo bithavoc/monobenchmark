@@ -161,7 +161,7 @@ namespace MonoBenchmarkConsole
 			using(XmlWriter writer = XmlWriter.Create(filename,settings ))
 			{
 				doc.WriteContentTo( writer);
-				Console.WriteLine("Output '{0}' Written",filename);
+				Console.WriteLine("Output '{0}' has been written",filename);
 #if DEBUG
 				System.Diagnostics.Process.Start("gedit " + filename);
 #endif
@@ -170,7 +170,7 @@ namespace MonoBenchmarkConsole
 		
 		static string formatDateTimeXml(DateTime time)
 		{
-			return time.ToString(); 
+			return time.ToString(System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat); 
 		}
 		
 		static XmlAttribute addAtt(XmlElement element,string name,string value)
