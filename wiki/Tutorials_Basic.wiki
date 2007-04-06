@@ -1,0 +1,29 @@
+#summary Tutorials: Basic Usage
+
+= Introduction =
+
+This is a introducion to MonoBenchmark Perfomance Tool.
+
+You will learn to:
+ * Build test code using C#
+ * Compile test assemblies
+ * Run test assemblies and analyze results.
+
+= Create a test =
+
+First we must create a _C#_ source file with the code to test, you can use any text editor like _vi_m or _gedit_ but I will use _vim_ Editor.
+
+Create a source file called "perfomance.cs"
+{{{
+ $vim perfomance.cs
+}}}
+
+Copy and Paste the following code:
+
+{{{
+
+}}}
+
+
+
+
