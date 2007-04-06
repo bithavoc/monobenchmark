@@ -31,7 +31,6 @@ dnl GTKSHARP_REQUIRED_VERSION=1.0
 dnl PKG_CHECK_MODULES(GTKSHARP, gtk-sharp >= $GTKSHARP_REQUIRED_VERSION)
 
 AC_SUBST(MCS)
-AC_SUBST(VERSION)
 
 dnl find assembly paths for unstable installed assemblies that will be
 dnl copied into monoskel installation directory for local usage with the app
