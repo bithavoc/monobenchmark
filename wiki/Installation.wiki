@@ -1,7 +1,5 @@
 #summary Installation Instructions
 
-=Installation=
-
 You will need compile the project and then install.
 ===Dependencies====
 Install dependencies for Ubuntu and Debian:
