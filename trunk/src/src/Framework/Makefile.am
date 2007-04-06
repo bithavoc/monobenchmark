@@ -1,3 +1,4 @@
+mbframework=MonoBenchmark.Framework
 mbframeworkdir=$(pkglibdir)
 mbframework_SCRIPTS = MonoBenchmark.Framework.dll
 EXTRA_DIST = $(mbframework_sources) $(mbframework_sources_in)
@@ -14,7 +15,7 @@ mbframework_build_sources += $(mbframework_generated_sources)
 MonoBenchmark.Framework.dll: $(mbframework_build_sources)
 	echo API VERSION
 	echo $(PACKAGE_VERSION)
-	$(MCS) /target:library -out:$@ $(mbframework_build_sources)
+	$(MCS) /target:library /keyfile:$(top_builddir)/src/key.snk -out:$@ $(mbframework_build_sources)
 
 # Install Unstable Mono Libraries (see configure.ac)
 
@@ -22,9 +23,11 @@ install-data-hook:
 	for ASM in $(INSTALLED_ASSEMBLIES); do \
 		$(INSTALL) -c -m 0755 $$ASM $(DESTDIR)$(pkglibdir); \
 	done;
+	cd $(pkglibdir)
+	-gacutil -i $(mbframework_SCRIPTS)
 
 uninstall-hook:
 	for ASM in $(INSTALLED_ASSEMBLIES); do \
 		rm -f $(DESTDIR)$(pkglibdir)/`basename $$ASM`; \
 	done;
-
+	-gacutil -u $(mbframework)
