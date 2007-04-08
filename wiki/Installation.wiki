@@ -11,5 +11,5 @@ Install dependencies for Ubuntu and Debian:
 ===Compile and Install===
 {{{
  wget http://monobenchmark.googlecode.com/files/monobenchmark-0.1.tar.gz
- cd monobenchmark-0.1 && ./configure && make && make install
+ cd monobenchmark && ./configure && make && make install
 }}}
